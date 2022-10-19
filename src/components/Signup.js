@@ -1,10 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/UserContext";
+import { FaGoogle } from "react-icons/fa";
 
 const Signup = () => {
   const [error, setError] = useState(null);
-  const { createUser } = useContext(AuthContext);
+  const { createUser, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -15,14 +20,23 @@ const Signup = () => {
     if (password < 6) {
       setError("Password must be 6 charracter long.");
       return;
-    };
+    }
 
     createUser(email, password)
       .then((userCredential) => {
         form.reset();
       })
       .catch((error) => {});
-      
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((res) => {
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -61,6 +75,17 @@ const Signup = () => {
               <button className="btn btn-primary">Sign Up</button>
             </div>
           </form>
+          <div className="form-control mx-8 mb-3">
+            <Link
+              onClick={handleGoogleSignIn}
+              className="btn btn-outline btn-success"
+            >
+              <span className="text-2xl mr-3">
+                <FaGoogle></FaGoogle>
+              </span>{" "}
+              Google
+            </Link>
+          </div>
           <p className="mx-auto mb-5">
             Already have an account? <Link to="/login">Log In</Link>
           </p>

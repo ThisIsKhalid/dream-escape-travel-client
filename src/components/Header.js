@@ -41,6 +41,9 @@ const Header = () => {
             <li>
               <Link to="/place">Places</Link>
             </li>
+            <li>
+              <Link to="/extraoffer">Offer!</Link>
+            </li>
             {user?.email ? (
               <li onClick={handleLogout}>
                 <Link>Log Out</Link>
@@ -77,6 +80,9 @@ const Header = () => {
           </li>
           <li>
             <Link to="/place">Places</Link>
+          </li>
+          <li>
+              <Link to="/extraoffer">Offer!</Link>
           </li>
           {user?.email ? (
             <li onClick={handleLogout}>

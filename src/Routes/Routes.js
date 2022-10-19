@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
+import ExtraOffer from "../components/ExtraOffer";
 import Home from "../components/Home";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import PlaceDetails from "../components/TravelCategories/PlaceDetails";
 import TravelPlace from "../components/TravelCategories/TravelPlaces";
 import MainLayout from "../layout/MainLayout";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -21,11 +23,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/place',
-                element: <TravelPlace></TravelPlace>
+                element: <PrivateRoute><TravelPlace></TravelPlace></PrivateRoute>
             },
             {
                 path: '/place/:id',
                 element: <PlaceDetails></PlaceDetails>
+            },
+            {
+                path: '/extraoffer',
+                element: <PrivateRoute><ExtraOffer></ExtraOffer></PrivateRoute>
             },
             {
                 path: '/signup',
