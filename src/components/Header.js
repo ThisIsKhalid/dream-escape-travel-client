@@ -35,6 +35,12 @@ const Header = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
+            <li>
+              <Link to="/place">Places</Link>
+            </li>
             {user?.email ? (
               <li onClick={handleLogout}>
                 <Link>Log Out</Link>
@@ -49,22 +55,29 @@ const Header = () => {
                 </li>
               </>
             )}
-
-            <li>
-              <Link to="/place">Places</Link>
-            </li>
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost normal-case text-2xl font-mono">
-          <span className="text-orange-500">Dream</span><span className="text-fuchsia-500">Escape</span>
+          <span className="text-orange-500">Dream</span>
+          <span className="text-fuchsia-500">Escape</span>
         </Link>
-        {
-          user &&
-          <p className="text-white font-semibold">User: <span className="text-amber-500 text-lg font-mono">{user?.email}</span></p>
-        }
+        {user && (
+          <p className="text-white font-semibold">
+            User:{" "}
+            <span className="text-amber-500 text-lg font-mono">
+              {user?.email}
+            </span>
+          </p>
+        )}
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
+          <li>
+            <Link to="/home">Home</Link>
+          </li>
+          <li>
+            <Link to="/place">Places</Link>
+          </li>
           {user?.email ? (
             <li onClick={handleLogout}>
               <Link>Log Out</Link>
@@ -79,10 +92,6 @@ const Header = () => {
               </li>
             </>
           )}
-
-          <li>
-            <Link to="/place">Places</Link>
-          </li>
         </ul>
       </div>
       <div className="navbar-end">
